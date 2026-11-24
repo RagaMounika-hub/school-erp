@@ -99,15 +99,21 @@ function Sidebar() {
 )}
 
 {/* Teacher */}
+{/* Teacher */}
 {role === "teacher" && (
   <>
-    
+    <li className="nav-item mb-3">
+      <Link className="nav-link text-white" to="/attendance">
+        <FaClipboardCheck /> Attendance
+      </Link>
+    </li>
 
     <li className="nav-item mb-3">
       <Link className="nav-link text-white" to="/leave">
         📝 Leave
       </Link>
     </li>
+
     <li className="nav-item mb-3">
       <Link className="nav-link text-white" to="/notices">
         <FaBullhorn /> Notice Board

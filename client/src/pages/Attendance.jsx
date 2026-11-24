@@ -327,58 +327,60 @@ const exportAttendance = () => {
 
           </div>
 
-          <div className="card shadow p-3 mb-4">
+          {["superadmin", "schooladmin"].includes(localStorage.getItem("role")) && (
+  <div className="card shadow p-3 mb-4">
 
-            <h4>Teacher Attendance</h4>
+    <h4>Teacher Attendance</h4>
 
-            <form className="row g-3" onSubmit={markTeacherAttendance}>
+    <form className="row g-3" onSubmit={markTeacherAttendance}>
 
-              <div className="col-md-4">
-                <select
-                  className="form-select"
-                  value={teacherForm.teacher}
-                  onChange={(e) =>
-                    setTeacherForm({
-                      ...teacherForm,
-                      teacher: e.target.value,
-                    })
-                  }
-                >
-                  <option value="">Select Teacher</option>
+      <div className="col-md-4">
+        <select
+          className="form-select"
+          value={teacherForm.teacher}
+          onChange={(e) =>
+            setTeacherForm({
+              ...teacherForm,
+              teacher: e.target.value,
+            })
+          }
+        >
+          <option value="">Select Teacher</option>
 
-                  {teachers.map((teacher) => (
-                    <option key={teacher._id} value={teacher._id}>
-                      {teacher.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          {teachers.map((teacher) => (
+            <option key={teacher._id} value={teacher._id}>
+              {teacher.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
-              <div className="col-md-3">
-                <select
-                  className="form-select"
-                  value={teacherForm.status}
-                  onChange={(e) =>
-                    setTeacherForm({
-                      ...teacherForm,
-                      status: e.target.value,
-                    })
-                  }
-                >
-                  <option>Present</option>
-                  <option>Absent</option>
-                </select>
-              </div>
+      <div className="col-md-3">
+        <select
+          className="form-select"
+          value={teacherForm.status}
+          onChange={(e) =>
+            setTeacherForm({
+              ...teacherForm,
+              status: e.target.value,
+            })
+          }
+        >
+          <option>Present</option>
+          <option>Absent</option>
+        </select>
+      </div>
 
-              <div className="col-md-3">
-                <button className="btn btn-primary w-100">
-                  Mark Teacher Attendance
-                </button>
-              </div>
+      <div className="col-md-3">
+        <button className="btn btn-primary w-100">
+          Mark Teacher Attendance
+        </button>
+      </div>
 
-            </form>
+    </form>
 
-          </div>
+  </div>
+)}
                     <div className="card shadow p-3 mb-4">
                       <button
   className="btn btn-success mb-3"
@@ -473,63 +475,65 @@ const exportAttendance = () => {
 
           </div>
 
-          <div className="card shadow p-3">
-            <button
-  className="btn btn-primary mb-3"
-  onClick={exportTeacherAttendance}
->
-  Export Teacher Attendance
-</button>
-<button
-  className="btn btn-danger mb-3 ms-2"
-  onClick={exportTeacherPDF}
->
-  Export Teacher PDF
-</button>
+          {["superadmin", "schooladmin"].includes(localStorage.getItem("role")) && (
+  <div className="card shadow p-3">
 
-            <h4>Teacher Attendance Records</h4>
+    <button
+      className="btn btn-primary mb-3"
+      onClick={exportTeacherAttendance}
+    >
+      Export Teacher Attendance
+    </button>
 
-            <table className="table table-bordered table-hover">
+    <button
+      className="btn btn-danger mb-3 ms-2"
+      onClick={exportTeacherPDF}
+    >
+      Export Teacher PDF
+    </button>
 
-              <thead className="table-dark">
-                <tr>
-                  <th>Teacher</th>
-                  <th>Status</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
+    <h4>Teacher Attendance Records</h4>
 
-              <tbody>
+    <table className="table table-bordered table-hover">
 
-                {filteredAttendance
-                  .filter((item) => item.teacher)
-                  .map((item) => (
-                    <tr key={item._id}>
-                      <td>{item.teacher?.name}</td>
+      <thead className="table-dark">
+        <tr>
+          <th>Teacher</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
 
-                      <td>
-                        <span
-                          className={
-                            item.status === "Present"
-                              ? "badge bg-success"
-                              : "badge bg-danger"
-                          }
-                        >
-                          {item.status}
-                        </span>
-                      </td>
+      <tbody>
+        {filteredAttendance
+          .filter((item) => item.teacher)
+          .map((item) => (
+            <tr key={item._id}>
+              <td>{item.teacher?.name}</td>
 
-                      <td>
-                        {new Date(item.createdAt).toLocaleDateString()}
-                      </td>
-                    </tr>
-                  ))}
+              <td>
+                <span
+                  className={
+                    item.status === "Present"
+                      ? "badge bg-success"
+                      : "badge bg-danger"
+                  }
+                >
+                  {item.status}
+                </span>
+              </td>
 
-              </tbody>
+              <td>
+                {new Date(item.createdAt).toLocaleDateString()}
+              </td>
+            </tr>
+          ))}
+      </tbody>
 
-            </table>
+    </table>
 
-          </div>
+  </div>
+)}
 
         </div>
 

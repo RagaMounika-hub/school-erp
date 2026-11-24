@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../services/api";
 
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
@@ -19,17 +19,11 @@ function Dashboard() {
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:5000/api/dashboard",
-          {
-            headers: {
-              Authorization:
-                "Bearer " + localStorage.getItem("token"),
-            },
-          }
-        );
+        const res = await API.get("/dashboard");
 
-        setData(res.data);
+console.log("Dashboard API Response:", res.data);
+
+setData(res.data);
       } catch (err) {
         console.log(err);
       }
