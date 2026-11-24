@@ -154,7 +154,7 @@ function Leave() {
                   <th>Reason</th>
                   <th>Status</th>
 
-                  {role === "schooladmin" && (
+                  {["schooladmin", "superadmin"].includes(role) && (
                     <th>Action</th>
                   )}
 
@@ -200,7 +200,7 @@ function Leave() {
 
                     </td>
 
-                    {role === "schooladmin" && (
+                    {["schooladmin", "superadmin"].includes(role) && (
 
                       <td>
 
